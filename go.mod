@@ -1,4 +1,4 @@
-module github.com/hal-bo/mecm2mv2_proto
+module github.com/TeraokaKanekoLab/mecm2mv2_proto
 
 go 1.23.1
 
