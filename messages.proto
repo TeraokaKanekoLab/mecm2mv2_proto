@@ -1,0 +1,136 @@
+syntax = "proto3";
+package mecm2mv2_proto;
+
+option go_package = "./;mecm2mv2_proto";
+
+message UDPMessage {
+  oneof message {
+    DataMessage data_message = 1;
+  }
+}
+
+message VirtualManagerAPI {
+  oneof message {
+      VirtualManagerApiNodeSearchRequest node_search_request = 1;
+      VirtualManagerApiNodeRegistrationRequest node_registration_request = 2;
+      // VirtualManagerAPI_NodeSubscriptionRequest data_subscription_request = 2;
+  }
+}
+
+message VirtualNodeAPI {
+  oneof message {
+      VirtualNodeApiDataSubscriptionRequest data_subscription_request = 3;
+      VirtualNodeApiUpdateSubscriptionRequest update_subscription_request = 4;
+      VirtualNodeApiCancelSubscriptionRequest cancel_subscription_request = 5;
+      // ... 他の既存のメッセージ ...
+  }
+}
+
+message VirtualManagerApiNodeSearchRequest {
+  Area area = 1;
+}
+
+message VirtualManagerApiNodeSearchResponse {
+  repeated VirtualNode nodes = 1;
+}
+
+message VirtualManagerApiNodeRegistrationRequest {
+  PhysicalNode physical_node = 1;
+}
+
+message VirtualManagerApiNodeRegistrationResponse {
+  bool success = 1;
+  string error_message = 2;
+  VirtualNode virtual_node = 3;
+}
+
+message PhysicalNode {
+  string id = 1;
+  Location location = 2;
+  NodeType node_type = 3;
+  string quic_address = 4;
+  string udp_address = 5;
+}
+
+message VirtualNode {
+  string id = 1;
+  Location location = 2;
+  string quic_address = 3;
+  string udp_address = 4;
+  NodeType node_type = 5;
+}
+
+message VirtualModule {
+  string id = 1;
+  string quic_address = 2;
+  string udp_address = 3;
+  repeated NodeType supported_node_types = 4;
+  int32 max_nodes = 5;
+  int32 current_nodes = 6;
+}
+
+enum NodeType {
+  VEHICLE = 0;
+  TEMP_SENSOR = 1;
+  HUMIDITY_SENSOR = 2;
+}
+
+message VirtualNodeApiDataSubscriptionRequest {
+  string node_id = 1;
+  string udp_address = 2;
+  DataType data_type = 3;
+  int32 min_interval_ms = 4;
+  int64 expiration_time = 5; // Unixタイムスタンプ（ミリ秒）
+}
+
+message VirtualNodeApiDataSubscriptionResponse {
+  bool success = 1;
+  string error_message = 2;
+  string subscription_id = 3; // 追加: サブスクリプションID
+}
+
+message DataMessage {
+  string node_id = 1;
+  bytes data = 2;
+  DataType data_type = 3; // 追加: データ型
+}
+
+message Location {
+  double lat = 1;
+  double lon = 2;
+}
+
+message Area {
+  Location south_east = 1;
+  Location north_west = 2;
+}
+
+enum DataType {
+  ALL = 0;
+  LOCATION = 1;
+  TEMPERATURE = 2;
+  HUMIDITY = 3;
+  PRESSURE = 4;
+  // 必要に応じて他のデータ型を追加
+}
+
+message VirtualNodeApiUpdateSubscriptionRequest {
+  string subscription_id = 1;
+  string new_udp_address = 2; // オプション：新しいUDPアドレス
+  int32 new_min_interval_ms = 3; // オプション：新しい最小間隔
+  int64 new_expiration_time = 4; // オプション：新しい有効期限（Unixタイムスタンプ、ミリ秒）
+}
+
+message VirtualNodeApiUpdateSubscriptionResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message VirtualNodeApiCancelSubscriptionRequest {
+  string subscription_id = 1;
+}
+
+message VirtualNodeApiCancelSubscriptionResponse {
+  bool success = 1;
+  string error_message = 2;
+}
