@@ -1356,6 +1356,193 @@ func (x *VirtualNodeApiCancelSubscriptionResponse) GetErrorMessage() string {
 	return ""
 }
 
+// 認証APIをoneofで定義
+type AuthenticationServerAPI struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Message:
+	//	*AuthenticationServerAPI_AuthenticationRequest
+	Message isAuthenticationServerAPI_Message `protobuf_oneof:"message"`
+}
+
+func (x *AuthenticationServerAPI) Reset() {
+	*x = AuthenticationServerAPI{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_messages_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AuthenticationServerAPI) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthenticationServerAPI) ProtoMessage() {}
+
+func (x *AuthenticationServerAPI) ProtoReflect() protoreflect.Message {
+	mi := &file_messages_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthenticationServerAPI.ProtoReflect.Descriptor instead.
+func (*AuthenticationServerAPI) Descriptor() ([]byte, []int) {
+	return file_messages_proto_rawDescGZIP(), []int{19}
+}
+
+func (m *AuthenticationServerAPI) GetMessage() isAuthenticationServerAPI_Message {
+	if m != nil {
+		return m.Message
+	}
+	return nil
+}
+
+func (x *AuthenticationServerAPI) GetAuthenticationRequest() *AuthenticationServerAuthenticationRequest {
+	if x, ok := x.GetMessage().(*AuthenticationServerAPI_AuthenticationRequest); ok {
+		return x.AuthenticationRequest
+	}
+	return nil
+}
+
+type isAuthenticationServerAPI_Message interface {
+	isAuthenticationServerAPI_Message()
+}
+
+type AuthenticationServerAPI_AuthenticationRequest struct {
+	AuthenticationRequest *AuthenticationServerAuthenticationRequest `protobuf:"bytes,1,opt,name=authentication_request,json=authenticationRequest,proto3,oneof"`
+}
+
+func (*AuthenticationServerAPI_AuthenticationRequest) isAuthenticationServerAPI_Message() {}
+
+// 認証リクエストメッセージ
+type AuthenticationServerAuthenticationRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AccessKey string `protobuf:"bytes,1,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
+}
+
+func (x *AuthenticationServerAuthenticationRequest) Reset() {
+	*x = AuthenticationServerAuthenticationRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_messages_proto_msgTypes[20]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AuthenticationServerAuthenticationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthenticationServerAuthenticationRequest) ProtoMessage() {}
+
+func (x *AuthenticationServerAuthenticationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_messages_proto_msgTypes[20]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthenticationServerAuthenticationRequest.ProtoReflect.Descriptor instead.
+func (*AuthenticationServerAuthenticationRequest) Descriptor() ([]byte, []int) {
+	return file_messages_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *AuthenticationServerAuthenticationRequest) GetAccessKey() string {
+	if x != nil {
+		return x.AccessKey
+	}
+	return ""
+}
+
+// 認証レスポンスメッセージ
+type AuthenticationServerAuthenticationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success        bool   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	SessionKey     string `protobuf:"bytes,2,opt,name=session_key,json=sessionKey,proto3" json:"session_key,omitempty"`
+	ExpirationTime int64  `protobuf:"varint,3,opt,name=expiration_time,json=expirationTime,proto3" json:"expiration_time,omitempty"` // Unixタイムスタンプ（ミリ秒）
+	ErrorMessage   string `protobuf:"bytes,4,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+}
+
+func (x *AuthenticationServerAuthenticationResponse) Reset() {
+	*x = AuthenticationServerAuthenticationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_messages_proto_msgTypes[21]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AuthenticationServerAuthenticationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthenticationServerAuthenticationResponse) ProtoMessage() {}
+
+func (x *AuthenticationServerAuthenticationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_messages_proto_msgTypes[21]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthenticationServerAuthenticationResponse.ProtoReflect.Descriptor instead.
+func (*AuthenticationServerAuthenticationResponse) Descriptor() ([]byte, []int) {
+	return file_messages_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *AuthenticationServerAuthenticationResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *AuthenticationServerAuthenticationResponse) GetSessionKey() string {
+	if x != nil {
+		return x.SessionKey
+	}
+	return ""
+}
+
+func (x *AuthenticationServerAuthenticationResponse) GetExpirationTime() int64 {
+	if x != nil {
+		return x.ExpirationTime
+	}
+	return 0
+}
+
+func (x *AuthenticationServerAuthenticationResponse) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
 var File_messages_proto protoreflect.FileDescriptor
 
 var file_messages_proto_rawDesc = []byte{
@@ -1551,17 +1738,43 @@ var file_messages_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x12, 0x23, 0x0a,
 	0x0d, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x2a, 0x3d, 0x0a, 0x08, 0x4e, 0x6f, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0b,
-	0x0a, 0x07, 0x56, 0x45, 0x48, 0x49, 0x43, 0x4c, 0x45, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x54,
-	0x45, 0x4d, 0x50, 0x5f, 0x53, 0x45, 0x4e, 0x53, 0x4f, 0x52, 0x10, 0x01, 0x12, 0x13, 0x0a, 0x0f,
-	0x48, 0x55, 0x4d, 0x49, 0x44, 0x49, 0x54, 0x59, 0x5f, 0x53, 0x45, 0x4e, 0x53, 0x4f, 0x52, 0x10,
-	0x02, 0x2a, 0x4e, 0x0a, 0x08, 0x44, 0x61, 0x74, 0x61, 0x54, 0x79, 0x70, 0x65, 0x12, 0x07, 0x0a,
-	0x03, 0x41, 0x4c, 0x4c, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x4c, 0x4f, 0x43, 0x41, 0x54, 0x49,
-	0x4f, 0x4e, 0x10, 0x01, 0x12, 0x0f, 0x0a, 0x0b, 0x54, 0x45, 0x4d, 0x50, 0x45, 0x52, 0x41, 0x54,
-	0x55, 0x52, 0x45, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x48, 0x55, 0x4d, 0x49, 0x44, 0x49, 0x54,
-	0x59, 0x10, 0x03, 0x12, 0x0c, 0x0a, 0x08, 0x50, 0x52, 0x45, 0x53, 0x53, 0x55, 0x52, 0x45, 0x10,
-	0x04, 0x42, 0x13, 0x5a, 0x11, 0x2e, 0x2f, 0x3b, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32,
-	0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x67, 0x65, 0x22, 0x98, 0x01, 0x0a, 0x17, 0x41, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x41, 0x50, 0x49, 0x12, 0x72,
+	0x0a, 0x16, 0x61, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x39,
+	0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x41, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x48, 0x00, 0x52, 0x15, 0x61, 0x75, 0x74,
+	0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x42, 0x09, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x4a, 0x0a,
+	0x29, 0x41, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53,
+	0x65, 0x72, 0x76, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63,
+	0x63, 0x65, 0x73, 0x73, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
+	0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x4b, 0x65, 0x79, 0x22, 0xb5, 0x01, 0x0a, 0x2a, 0x41, 0x75,
+	0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63,
+	0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
+	0x73, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6b, 0x65,
+	0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x4b, 0x65, 0x79, 0x12, 0x27, 0x0a, 0x0f, 0x65, 0x78, 0x70, 0x69, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x65, 0x78,
+	0x70, 0x69, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x23, 0x0a, 0x0d,
+	0x65, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0c, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x2a, 0x3d, 0x0a, 0x08, 0x4e, 0x6f, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0b, 0x0a,
+	0x07, 0x56, 0x45, 0x48, 0x49, 0x43, 0x4c, 0x45, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x54, 0x45,
+	0x4d, 0x50, 0x5f, 0x53, 0x45, 0x4e, 0x53, 0x4f, 0x52, 0x10, 0x01, 0x12, 0x13, 0x0a, 0x0f, 0x48,
+	0x55, 0x4d, 0x49, 0x44, 0x49, 0x54, 0x59, 0x5f, 0x53, 0x45, 0x4e, 0x53, 0x4f, 0x52, 0x10, 0x02,
+	0x2a, 0x4e, 0x0a, 0x08, 0x44, 0x61, 0x74, 0x61, 0x54, 0x79, 0x70, 0x65, 0x12, 0x07, 0x0a, 0x03,
+	0x41, 0x4c, 0x4c, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x4c, 0x4f, 0x43, 0x41, 0x54, 0x49, 0x4f,
+	0x4e, 0x10, 0x01, 0x12, 0x0f, 0x0a, 0x0b, 0x54, 0x45, 0x4d, 0x50, 0x45, 0x52, 0x41, 0x54, 0x55,
+	0x52, 0x45, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x48, 0x55, 0x4d, 0x49, 0x44, 0x49, 0x54, 0x59,
+	0x10, 0x03, 0x12, 0x0c, 0x0a, 0x08, 0x50, 0x52, 0x45, 0x53, 0x53, 0x55, 0x52, 0x45, 0x10, 0x04,
+	0x42, 0x13, 0x5a, 0x11, 0x2e, 0x2f, 0x3b, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1577,29 +1790,32 @@ func file_messages_proto_rawDescGZIP() []byte {
 }
 
 var file_messages_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_messages_proto_goTypes = []interface{}{
-	(NodeType)(0),                                     // 0: mecm2mv2_proto.NodeType
-	(DataType)(0),                                     // 1: mecm2mv2_proto.DataType
-	(*UDPMessage)(nil),                                // 2: mecm2mv2_proto.UDPMessage
-	(*VirtualManagerAPI)(nil),                         // 3: mecm2mv2_proto.VirtualManagerAPI
-	(*VirtualNodeAPI)(nil),                            // 4: mecm2mv2_proto.VirtualNodeAPI
-	(*VirtualManagerApiNodeSearchRequest)(nil),        // 5: mecm2mv2_proto.VirtualManagerApiNodeSearchRequest
-	(*VirtualManagerApiNodeSearchResponse)(nil),       // 6: mecm2mv2_proto.VirtualManagerApiNodeSearchResponse
-	(*VirtualManagerApiNodeRegistrationRequest)(nil),  // 7: mecm2mv2_proto.VirtualManagerApiNodeRegistrationRequest
-	(*VirtualManagerApiNodeRegistrationResponse)(nil), // 8: mecm2mv2_proto.VirtualManagerApiNodeRegistrationResponse
-	(*PhysicalNode)(nil),                              // 9: mecm2mv2_proto.PhysicalNode
-	(*VirtualNode)(nil),                               // 10: mecm2mv2_proto.VirtualNode
-	(*VirtualModule)(nil),                             // 11: mecm2mv2_proto.VirtualModule
-	(*VirtualNodeApiDataSubscriptionRequest)(nil),     // 12: mecm2mv2_proto.VirtualNodeApiDataSubscriptionRequest
-	(*VirtualNodeApiDataSubscriptionResponse)(nil),    // 13: mecm2mv2_proto.VirtualNodeApiDataSubscriptionResponse
-	(*DataMessage)(nil),                               // 14: mecm2mv2_proto.DataMessage
-	(*Location)(nil),                                  // 15: mecm2mv2_proto.Location
-	(*Area)(nil),                                      // 16: mecm2mv2_proto.Area
-	(*VirtualNodeApiUpdateSubscriptionRequest)(nil),   // 17: mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionRequest
-	(*VirtualNodeApiUpdateSubscriptionResponse)(nil),  // 18: mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionResponse
-	(*VirtualNodeApiCancelSubscriptionRequest)(nil),   // 19: mecm2mv2_proto.VirtualNodeApiCancelSubscriptionRequest
-	(*VirtualNodeApiCancelSubscriptionResponse)(nil),  // 20: mecm2mv2_proto.VirtualNodeApiCancelSubscriptionResponse
+	(NodeType)(0),                                      // 0: mecm2mv2_proto.NodeType
+	(DataType)(0),                                      // 1: mecm2mv2_proto.DataType
+	(*UDPMessage)(nil),                                 // 2: mecm2mv2_proto.UDPMessage
+	(*VirtualManagerAPI)(nil),                          // 3: mecm2mv2_proto.VirtualManagerAPI
+	(*VirtualNodeAPI)(nil),                             // 4: mecm2mv2_proto.VirtualNodeAPI
+	(*VirtualManagerApiNodeSearchRequest)(nil),         // 5: mecm2mv2_proto.VirtualManagerApiNodeSearchRequest
+	(*VirtualManagerApiNodeSearchResponse)(nil),        // 6: mecm2mv2_proto.VirtualManagerApiNodeSearchResponse
+	(*VirtualManagerApiNodeRegistrationRequest)(nil),   // 7: mecm2mv2_proto.VirtualManagerApiNodeRegistrationRequest
+	(*VirtualManagerApiNodeRegistrationResponse)(nil),  // 8: mecm2mv2_proto.VirtualManagerApiNodeRegistrationResponse
+	(*PhysicalNode)(nil),                               // 9: mecm2mv2_proto.PhysicalNode
+	(*VirtualNode)(nil),                                // 10: mecm2mv2_proto.VirtualNode
+	(*VirtualModule)(nil),                              // 11: mecm2mv2_proto.VirtualModule
+	(*VirtualNodeApiDataSubscriptionRequest)(nil),      // 12: mecm2mv2_proto.VirtualNodeApiDataSubscriptionRequest
+	(*VirtualNodeApiDataSubscriptionResponse)(nil),     // 13: mecm2mv2_proto.VirtualNodeApiDataSubscriptionResponse
+	(*DataMessage)(nil),                                // 14: mecm2mv2_proto.DataMessage
+	(*Location)(nil),                                   // 15: mecm2mv2_proto.Location
+	(*Area)(nil),                                       // 16: mecm2mv2_proto.Area
+	(*VirtualNodeApiUpdateSubscriptionRequest)(nil),    // 17: mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionRequest
+	(*VirtualNodeApiUpdateSubscriptionResponse)(nil),   // 18: mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionResponse
+	(*VirtualNodeApiCancelSubscriptionRequest)(nil),    // 19: mecm2mv2_proto.VirtualNodeApiCancelSubscriptionRequest
+	(*VirtualNodeApiCancelSubscriptionResponse)(nil),   // 20: mecm2mv2_proto.VirtualNodeApiCancelSubscriptionResponse
+	(*AuthenticationServerAPI)(nil),                    // 21: mecm2mv2_proto.AuthenticationServerAPI
+	(*AuthenticationServerAuthenticationRequest)(nil),  // 22: mecm2mv2_proto.AuthenticationServerAuthenticationRequest
+	(*AuthenticationServerAuthenticationResponse)(nil), // 23: mecm2mv2_proto.AuthenticationServerAuthenticationResponse
 }
 var file_messages_proto_depIdxs = []int32{
 	14, // 0: mecm2mv2_proto.UDPMessage.data_message:type_name -> mecm2mv2_proto.DataMessage
@@ -1621,11 +1837,12 @@ var file_messages_proto_depIdxs = []int32{
 	1,  // 16: mecm2mv2_proto.DataMessage.data_type:type_name -> mecm2mv2_proto.DataType
 	15, // 17: mecm2mv2_proto.Area.south_east:type_name -> mecm2mv2_proto.Location
 	15, // 18: mecm2mv2_proto.Area.north_west:type_name -> mecm2mv2_proto.Location
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	22, // 19: mecm2mv2_proto.AuthenticationServerAPI.authentication_request:type_name -> mecm2mv2_proto.AuthenticationServerAuthenticationRequest
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_messages_proto_init() }
@@ -1862,6 +2079,42 @@ func file_messages_proto_init() {
 				return nil
 			}
 		}
+		file_messages_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AuthenticationServerAPI); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_messages_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AuthenticationServerAuthenticationRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_messages_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AuthenticationServerAuthenticationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_messages_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*UDPMessage_DataMessage)(nil),
@@ -1875,13 +2128,16 @@ func file_messages_proto_init() {
 		(*VirtualNodeAPI_UpdateSubscriptionRequest)(nil),
 		(*VirtualNodeAPI_CancelSubscriptionRequest)(nil),
 	}
+	file_messages_proto_msgTypes[19].OneofWrappers = []interface{}{
+		(*AuthenticationServerAPI_AuthenticationRequest)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_messages_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   19,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

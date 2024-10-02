@@ -134,3 +134,23 @@ message VirtualNodeApiCancelSubscriptionResponse {
   bool success = 1;
   string error_message = 2;
 }
+
+// 認証APIをoneofで定義
+message AuthenticationServerAPI {
+  oneof message {
+    AuthenticationServerAuthenticationRequest authentication_request = 1;
+  }
+}
+
+// 認証リクエストメッセージ
+message AuthenticationServerAuthenticationRequest {
+  string access_key = 1;
+}
+
+// 認証レスポンスメッセージ
+message AuthenticationServerAuthenticationResponse {
+  bool success = 1;
+  string session_key = 2;
+  int64 expiration_time = 3; // Unixタイムスタンプ（ミリ秒）
+  string error_message = 4;
+}
