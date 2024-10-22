@@ -9,20 +9,35 @@ message UDPMessage {
   }
 }
 
+// message GlobalVirtualManagerAPI {
+//  GlobalVirtualManagerApiGetLocalVirtualManagerRequest get_local_virtual_manager_request = 1;
+// }
+
 message VirtualManagerAPI {
   oneof message {
       VirtualManagerApiNodeSearchRequest node_search_request = 1;
       VirtualManagerApiNodeRegistrationRequest node_registration_request = 2;
-      // VirtualManagerAPI_NodeSubscriptionRequest data_subscription_request = 2;
+      // VirtualManagerApiPreMigrationRequest  premigration_request = 3;
+      // VirtualManagerApiMigrationRequest migration_request = 4;
   }
 }
 
 message VirtualNodeAPI {
   oneof message {
-      VirtualNodeApiDataSubscriptionRequest data_subscription_request = 3;
-      VirtualNodeApiUpdateSubscriptionRequest update_subscription_request = 4;
-      VirtualNodeApiCancelSubscriptionRequest cancel_subscription_request = 5;
+      VirtualNodeApiDataSubscriptionRequest data_subscription_request = 1;
+      VirtualNodeApiUpdateSubscriptionRequest update_subscription_request = 2;
+      VirtualNodeApiCancelSubscriptionRequest cancel_subscription_request = 3;
       // ... 他の既存のメッセージ ...
+      // VirtualNodeApiRegitrationRequest node_registration_request = 4;
+      // VirtualNodeApiActuateRequest actuate_request = 5;
+      // VirtualNodeApiGetPastDataRequest get_past_data_request = 6;
+  }
+}
+
+// 認証APIをoneofで定義
+message AuthenticationServerAPI {
+  oneof message {
+    AuthenticationServerAuthenticationRequest authentication_request = 1;
   }
 }
 
@@ -36,12 +51,14 @@ message VirtualManagerApiNodeSearchResponse {
 
 message VirtualManagerApiNodeRegistrationRequest {
   PhysicalNode physical_node = 1;
+  string access_key = 2;
 }
 
 message VirtualManagerApiNodeRegistrationResponse {
   bool success = 1;
   string error_message = 2;
   VirtualNode virtual_node = 3;
+  string sessionKey = 4;
 }
 
 message PhysicalNode {
@@ -133,13 +150,6 @@ message VirtualNodeApiCancelSubscriptionRequest {
 message VirtualNodeApiCancelSubscriptionResponse {
   bool success = 1;
   string error_message = 2;
-}
-
-// 認証APIをoneofで定義
-message AuthenticationServerAPI {
-  oneof message {
-    AuthenticationServerAuthenticationRequest authentication_request = 1;
-  }
 }
 
 // 認証リクエストメッセージ
