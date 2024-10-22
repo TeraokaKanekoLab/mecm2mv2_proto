@@ -58,7 +58,7 @@ message VirtualManagerApiNodeRegistrationResponse {
   bool success = 1;
   string error_message = 2;
   VirtualNode virtual_node = 3;
-  string sessionKey = 4;
+  bytes sessionKey = 4;
 }
 
 message PhysicalNode {
