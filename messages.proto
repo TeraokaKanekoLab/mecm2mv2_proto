@@ -28,7 +28,7 @@ message VirtualNodeAPI {
       VirtualNodeApiUpdateSubscriptionRequest update_subscription_request = 2;
       VirtualNodeApiCancelSubscriptionRequest cancel_subscription_request = 3;
       // ... 他の既存のメッセージ ...
-      // VirtualNodeApiRegitrationRequest node_registration_request = 4;
+      VirtualNodeApiNodeRegistrationRequest node_registration_request = 4;
       // VirtualNodeApiActuateRequest actuate_request = 5;
       // VirtualNodeApiGetPastDataRequest get_past_data_request = 6;
   }
@@ -91,6 +91,18 @@ enum NodeType {
   TEMP_SENSOR = 1;
   HUMIDITY_SENSOR = 2;
 }
+
+message VirtualNodeApiNodeRegistrationRequest {
+  PhysicalNode physical_node = 1;
+  VirtualNode virtual_node = 2;
+  bytes sessionKey = 3;
+}
+
+message VirtualNodeApiNodeRegistrationResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
 
 message VirtualNodeApiDataSubscriptionRequest {
   string node_id = 1;
