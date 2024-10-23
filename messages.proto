@@ -73,11 +73,9 @@ message PhysicalNode {
 message VirtualNode {
   string id = 1;
   Location location = 2;
-  string quic_address = 3;
-  string udp_address = 4;
-  NodeType node_type = 5;
-  ModuleInfo home_module = 6;
-  ModuleInfo foreign_module = 7;
+  NodeType node_type = 3;
+  ModuleInfo home_module = 4;
+  ModuleInfo foreign_module = 5;
 }
 
 message ModuleInfo {
