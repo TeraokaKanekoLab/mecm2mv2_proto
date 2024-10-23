@@ -76,15 +76,13 @@ message VirtualNode {
   string quic_address = 3;
   string udp_address = 4;
   NodeType node_type = 5;
+  ModuleInfo home_module = 6;
+  ModuleInfo foreign_module = 7;
 }
 
-message VirtualModule {
-  string id = 1;
-  string quic_address = 2;
-  string udp_address = 3;
-  repeated NodeType supported_node_types = 4;
-  int32 max_nodes = 5;
-  int32 current_nodes = 6;
+message ModuleInfo {
+  string quic_address = 1;
+  string udp_address = 2;
 }
 
 enum NodeType {
