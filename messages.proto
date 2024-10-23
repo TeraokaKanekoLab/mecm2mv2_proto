@@ -29,6 +29,7 @@ message VirtualNodeAPI {
       VirtualNodeApiCancelSubscriptionRequest cancel_subscription_request = 3;
       // ... 他の既存のメッセージ ...
       VirtualNodeApiNodeRegistrationRequest node_registration_request = 4;
+      VirtualNodeApiNodeUnregistrationRequest node_unregistration_request = 5;
       // VirtualNodeApiActuateRequest actuate_request = 5;
       // VirtualNodeApiGetPastDataRequest get_past_data_request = 6;
   }
@@ -103,6 +104,14 @@ message VirtualNodeApiNodeRegistrationResponse {
   string error_message = 2;
 }
 
+message VirtualNodeApiNodeUnregistrationRequest {
+  string vnode_id = 1;
+}
+
+message VirtualNodeApiNodeUnregistrationResponse {
+  bool success = 1;
+  string error_message = 2;
+}
 
 message VirtualNodeApiDataSubscriptionRequest {
   string node_id = 1;
