@@ -4,7 +4,7 @@ package mecm2mv2_proto;
 option go_package = "./;mecm2mv2_proto";
 
 message MECServerInfo {
-  int32 id = 1;
+  string id = 1;
   string ip_address = 2;
   int32 virtual_manager_port = 3;
   int32 authentication_server_port = 4;
