@@ -3,6 +3,12 @@ package mecm2mv2_proto;
 
 option go_package = "./;mecm2mv2_proto";
 
+message MECServerInfo {
+  string ip_address = 1;
+  int32 virtual_manager_port = 2;
+  int32 authentication_server_port = 3;
+}
+
 message UDPMessage {
   oneof message {
     DataMessage data_message = 1;
@@ -53,6 +59,7 @@ message VirtualManagerApiNodeSearchResponse {
 message VirtualManagerApiNodeRegistrationRequest {
   PhysicalNode physical_node = 1;
   string access_key = 2;
+  MECServerInfo home_mec = 3;
 }
 
 message VirtualManagerApiNodeRegistrationResponse {
@@ -172,6 +179,7 @@ message VirtualNodeApiCancelSubscriptionResponse {
 // 認証リクエストメッセージ
 message AuthenticationServerAuthenticationRequest {
   string access_key = 1;
+  MECServerInfo home_mec = 2;
 }
 
 // 認証レスポンスメッセージ
