@@ -693,10 +693,10 @@ type VirtualManagerApiNodeRegistrationResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Success      bool         `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
-	ErrorMessage string       `protobuf:"bytes,2,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	VirtualNode  *VirtualNode `protobuf:"bytes,3,opt,name=virtual_node,json=virtualNode,proto3" json:"virtual_node,omitempty"`
-	SessionKey   []byte       `protobuf:"bytes,4,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`
+	Success        bool            `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	ErrorMessage   string          `protobuf:"bytes,2,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	VirtualNode    *VirtualNode    `protobuf:"bytes,3,opt,name=virtual_node,json=virtualNode,proto3" json:"virtual_node,omitempty"`
+	SessionKeyInfo *SessionKeyInfo `protobuf:"bytes,4,opt,name=session_key_info,json=sessionKeyInfo,proto3" json:"session_key_info,omitempty"`
 }
 
 func (x *VirtualManagerApiNodeRegistrationResponse) Reset() {
@@ -752,9 +752,9 @@ func (x *VirtualManagerApiNodeRegistrationResponse) GetVirtualNode() *VirtualNod
 	return nil
 }
 
-func (x *VirtualManagerApiNodeRegistrationResponse) GetSessionKey() []byte {
+func (x *VirtualManagerApiNodeRegistrationResponse) GetSessionKeyInfo() *SessionKeyInfo {
 	if x != nil {
-		return x.SessionKey
+		return x.SessionKeyInfo
 	}
 	return nil
 }
@@ -917,6 +917,61 @@ func (x *VirtualNode) GetForeignModule() *ModuleInfo {
 	return nil
 }
 
+type SessionKeyInfo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SessionKey     []byte `protobuf:"bytes,1,opt,name=session_key,json=sessionKey,proto3" json:"session_key,omitempty"`
+	ExpirationTime int64  `protobuf:"varint,2,opt,name=expiration_time,json=expirationTime,proto3" json:"expiration_time,omitempty"` // Unix timestamp in milliseconds
+}
+
+func (x *SessionKeyInfo) Reset() {
+	*x = SessionKeyInfo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_messages_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SessionKeyInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SessionKeyInfo) ProtoMessage() {}
+
+func (x *SessionKeyInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_messages_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SessionKeyInfo.ProtoReflect.Descriptor instead.
+func (*SessionKeyInfo) Descriptor() ([]byte, []int) {
+	return file_messages_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SessionKeyInfo) GetSessionKey() []byte {
+	if x != nil {
+		return x.SessionKey
+	}
+	return nil
+}
+
+func (x *SessionKeyInfo) GetExpirationTime() int64 {
+	if x != nil {
+		return x.ExpirationTime
+	}
+	return 0
+}
+
 type ModuleInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -929,7 +984,7 @@ type ModuleInfo struct {
 func (x *ModuleInfo) Reset() {
 	*x = ModuleInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[11]
+		mi := &file_messages_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -942,7 +997,7 @@ func (x *ModuleInfo) String() string {
 func (*ModuleInfo) ProtoMessage() {}
 
 func (x *ModuleInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[11]
+	mi := &file_messages_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -955,7 +1010,7 @@ func (x *ModuleInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ModuleInfo.ProtoReflect.Descriptor instead.
 func (*ModuleInfo) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{11}
+	return file_messages_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ModuleInfo) GetQuicAddress() string {
@@ -977,15 +1032,15 @@ type VirtualNodeApiNodeRegistrationRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PhysicalNode *PhysicalNode `protobuf:"bytes,1,opt,name=physical_node,json=physicalNode,proto3" json:"physical_node,omitempty"`
-	VirtualNode  *VirtualNode  `protobuf:"bytes,2,opt,name=virtual_node,json=virtualNode,proto3" json:"virtual_node,omitempty"`
-	SessionKey   []byte        `protobuf:"bytes,3,opt,name=sessionKey,proto3" json:"sessionKey,omitempty"`
+	PhysicalNode   *PhysicalNode   `protobuf:"bytes,1,opt,name=physical_node,json=physicalNode,proto3" json:"physical_node,omitempty"`
+	VirtualNode    *VirtualNode    `protobuf:"bytes,2,opt,name=virtual_node,json=virtualNode,proto3" json:"virtual_node,omitempty"`
+	SessionKeyInfo *SessionKeyInfo `protobuf:"bytes,3,opt,name=session_key_info,json=sessionKeyInfo,proto3" json:"session_key_info,omitempty"`
 }
 
 func (x *VirtualNodeApiNodeRegistrationRequest) Reset() {
 	*x = VirtualNodeApiNodeRegistrationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[12]
+		mi := &file_messages_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -998,7 +1053,7 @@ func (x *VirtualNodeApiNodeRegistrationRequest) String() string {
 func (*VirtualNodeApiNodeRegistrationRequest) ProtoMessage() {}
 
 func (x *VirtualNodeApiNodeRegistrationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[12]
+	mi := &file_messages_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1011,7 +1066,7 @@ func (x *VirtualNodeApiNodeRegistrationRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use VirtualNodeApiNodeRegistrationRequest.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiNodeRegistrationRequest) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{12}
+	return file_messages_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *VirtualNodeApiNodeRegistrationRequest) GetPhysicalNode() *PhysicalNode {
@@ -1028,9 +1083,9 @@ func (x *VirtualNodeApiNodeRegistrationRequest) GetVirtualNode() *VirtualNode {
 	return nil
 }
 
-func (x *VirtualNodeApiNodeRegistrationRequest) GetSessionKey() []byte {
+func (x *VirtualNodeApiNodeRegistrationRequest) GetSessionKeyInfo() *SessionKeyInfo {
 	if x != nil {
-		return x.SessionKey
+		return x.SessionKeyInfo
 	}
 	return nil
 }
@@ -1047,7 +1102,7 @@ type VirtualNodeApiNodeRegistrationResponse struct {
 func (x *VirtualNodeApiNodeRegistrationResponse) Reset() {
 	*x = VirtualNodeApiNodeRegistrationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[13]
+		mi := &file_messages_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1060,7 +1115,7 @@ func (x *VirtualNodeApiNodeRegistrationResponse) String() string {
 func (*VirtualNodeApiNodeRegistrationResponse) ProtoMessage() {}
 
 func (x *VirtualNodeApiNodeRegistrationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[13]
+	mi := &file_messages_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1073,7 +1128,7 @@ func (x *VirtualNodeApiNodeRegistrationResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use VirtualNodeApiNodeRegistrationResponse.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiNodeRegistrationResponse) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{13}
+	return file_messages_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *VirtualNodeApiNodeRegistrationResponse) GetSuccess() bool {
@@ -1101,7 +1156,7 @@ type VirtualNodeApiNodeUnregistrationRequest struct {
 func (x *VirtualNodeApiNodeUnregistrationRequest) Reset() {
 	*x = VirtualNodeApiNodeUnregistrationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[14]
+		mi := &file_messages_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1114,7 +1169,7 @@ func (x *VirtualNodeApiNodeUnregistrationRequest) String() string {
 func (*VirtualNodeApiNodeUnregistrationRequest) ProtoMessage() {}
 
 func (x *VirtualNodeApiNodeUnregistrationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[14]
+	mi := &file_messages_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1127,7 +1182,7 @@ func (x *VirtualNodeApiNodeUnregistrationRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use VirtualNodeApiNodeUnregistrationRequest.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiNodeUnregistrationRequest) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{14}
+	return file_messages_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *VirtualNodeApiNodeUnregistrationRequest) GetVnodeId() string {
@@ -1149,7 +1204,7 @@ type VirtualNodeApiNodeUnregistrationResponse struct {
 func (x *VirtualNodeApiNodeUnregistrationResponse) Reset() {
 	*x = VirtualNodeApiNodeUnregistrationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[15]
+		mi := &file_messages_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1162,7 +1217,7 @@ func (x *VirtualNodeApiNodeUnregistrationResponse) String() string {
 func (*VirtualNodeApiNodeUnregistrationResponse) ProtoMessage() {}
 
 func (x *VirtualNodeApiNodeUnregistrationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[15]
+	mi := &file_messages_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1175,7 +1230,7 @@ func (x *VirtualNodeApiNodeUnregistrationResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use VirtualNodeApiNodeUnregistrationResponse.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiNodeUnregistrationResponse) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{15}
+	return file_messages_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *VirtualNodeApiNodeUnregistrationResponse) GetSuccess() bool {
@@ -1207,7 +1262,7 @@ type VirtualNodeApiDataSubscriptionRequest struct {
 func (x *VirtualNodeApiDataSubscriptionRequest) Reset() {
 	*x = VirtualNodeApiDataSubscriptionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[16]
+		mi := &file_messages_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1220,7 +1275,7 @@ func (x *VirtualNodeApiDataSubscriptionRequest) String() string {
 func (*VirtualNodeApiDataSubscriptionRequest) ProtoMessage() {}
 
 func (x *VirtualNodeApiDataSubscriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[16]
+	mi := &file_messages_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1233,7 +1288,7 @@ func (x *VirtualNodeApiDataSubscriptionRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use VirtualNodeApiDataSubscriptionRequest.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiDataSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{16}
+	return file_messages_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *VirtualNodeApiDataSubscriptionRequest) GetNodeId() string {
@@ -1284,7 +1339,7 @@ type VirtualNodeApiDataSubscriptionResponse struct {
 func (x *VirtualNodeApiDataSubscriptionResponse) Reset() {
 	*x = VirtualNodeApiDataSubscriptionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[17]
+		mi := &file_messages_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1297,7 +1352,7 @@ func (x *VirtualNodeApiDataSubscriptionResponse) String() string {
 func (*VirtualNodeApiDataSubscriptionResponse) ProtoMessage() {}
 
 func (x *VirtualNodeApiDataSubscriptionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[17]
+	mi := &file_messages_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1310,7 +1365,7 @@ func (x *VirtualNodeApiDataSubscriptionResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use VirtualNodeApiDataSubscriptionResponse.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiDataSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{17}
+	return file_messages_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *VirtualNodeApiDataSubscriptionResponse) GetSuccess() bool {
@@ -1347,7 +1402,7 @@ type DataMessage struct {
 func (x *DataMessage) Reset() {
 	*x = DataMessage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[18]
+		mi := &file_messages_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1360,7 +1415,7 @@ func (x *DataMessage) String() string {
 func (*DataMessage) ProtoMessage() {}
 
 func (x *DataMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[18]
+	mi := &file_messages_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1373,7 +1428,7 @@ func (x *DataMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataMessage.ProtoReflect.Descriptor instead.
 func (*DataMessage) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{18}
+	return file_messages_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DataMessage) GetNodeId() string {
@@ -1409,7 +1464,7 @@ type Location struct {
 func (x *Location) Reset() {
 	*x = Location{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[19]
+		mi := &file_messages_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1422,7 +1477,7 @@ func (x *Location) String() string {
 func (*Location) ProtoMessage() {}
 
 func (x *Location) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[19]
+	mi := &file_messages_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1435,7 +1490,7 @@ func (x *Location) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Location.ProtoReflect.Descriptor instead.
 func (*Location) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{19}
+	return file_messages_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Location) GetLat() float64 {
@@ -1464,7 +1519,7 @@ type Area struct {
 func (x *Area) Reset() {
 	*x = Area{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[20]
+		mi := &file_messages_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1477,7 +1532,7 @@ func (x *Area) String() string {
 func (*Area) ProtoMessage() {}
 
 func (x *Area) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[20]
+	mi := &file_messages_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1490,7 +1545,7 @@ func (x *Area) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Area.ProtoReflect.Descriptor instead.
 func (*Area) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{20}
+	return file_messages_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *Area) GetSouthEast() *Location {
@@ -1521,7 +1576,7 @@ type VirtualNodeApiUpdateSubscriptionRequest struct {
 func (x *VirtualNodeApiUpdateSubscriptionRequest) Reset() {
 	*x = VirtualNodeApiUpdateSubscriptionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[21]
+		mi := &file_messages_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1534,7 +1589,7 @@ func (x *VirtualNodeApiUpdateSubscriptionRequest) String() string {
 func (*VirtualNodeApiUpdateSubscriptionRequest) ProtoMessage() {}
 
 func (x *VirtualNodeApiUpdateSubscriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[21]
+	mi := &file_messages_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1547,7 +1602,7 @@ func (x *VirtualNodeApiUpdateSubscriptionRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use VirtualNodeApiUpdateSubscriptionRequest.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiUpdateSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{21}
+	return file_messages_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *VirtualNodeApiUpdateSubscriptionRequest) GetSubscriptionId() string {
@@ -1590,7 +1645,7 @@ type VirtualNodeApiUpdateSubscriptionResponse struct {
 func (x *VirtualNodeApiUpdateSubscriptionResponse) Reset() {
 	*x = VirtualNodeApiUpdateSubscriptionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[22]
+		mi := &file_messages_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1603,7 +1658,7 @@ func (x *VirtualNodeApiUpdateSubscriptionResponse) String() string {
 func (*VirtualNodeApiUpdateSubscriptionResponse) ProtoMessage() {}
 
 func (x *VirtualNodeApiUpdateSubscriptionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[22]
+	mi := &file_messages_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1616,7 +1671,7 @@ func (x *VirtualNodeApiUpdateSubscriptionResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use VirtualNodeApiUpdateSubscriptionResponse.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiUpdateSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{22}
+	return file_messages_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *VirtualNodeApiUpdateSubscriptionResponse) GetSuccess() bool {
@@ -1644,7 +1699,7 @@ type VirtualNodeApiCancelSubscriptionRequest struct {
 func (x *VirtualNodeApiCancelSubscriptionRequest) Reset() {
 	*x = VirtualNodeApiCancelSubscriptionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[23]
+		mi := &file_messages_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1657,7 +1712,7 @@ func (x *VirtualNodeApiCancelSubscriptionRequest) String() string {
 func (*VirtualNodeApiCancelSubscriptionRequest) ProtoMessage() {}
 
 func (x *VirtualNodeApiCancelSubscriptionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[23]
+	mi := &file_messages_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1670,7 +1725,7 @@ func (x *VirtualNodeApiCancelSubscriptionRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use VirtualNodeApiCancelSubscriptionRequest.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiCancelSubscriptionRequest) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{23}
+	return file_messages_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *VirtualNodeApiCancelSubscriptionRequest) GetSubscriptionId() string {
@@ -1692,7 +1747,7 @@ type VirtualNodeApiCancelSubscriptionResponse struct {
 func (x *VirtualNodeApiCancelSubscriptionResponse) Reset() {
 	*x = VirtualNodeApiCancelSubscriptionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[24]
+		mi := &file_messages_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1705,7 +1760,7 @@ func (x *VirtualNodeApiCancelSubscriptionResponse) String() string {
 func (*VirtualNodeApiCancelSubscriptionResponse) ProtoMessage() {}
 
 func (x *VirtualNodeApiCancelSubscriptionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[24]
+	mi := &file_messages_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1718,7 +1773,7 @@ func (x *VirtualNodeApiCancelSubscriptionResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use VirtualNodeApiCancelSubscriptionResponse.ProtoReflect.Descriptor instead.
 func (*VirtualNodeApiCancelSubscriptionResponse) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{24}
+	return file_messages_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *VirtualNodeApiCancelSubscriptionResponse) GetSuccess() bool {
@@ -1748,7 +1803,7 @@ type AuthenticationServerAuthenticationRequest struct {
 func (x *AuthenticationServerAuthenticationRequest) Reset() {
 	*x = AuthenticationServerAuthenticationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[25]
+		mi := &file_messages_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1761,7 +1816,7 @@ func (x *AuthenticationServerAuthenticationRequest) String() string {
 func (*AuthenticationServerAuthenticationRequest) ProtoMessage() {}
 
 func (x *AuthenticationServerAuthenticationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[25]
+	mi := &file_messages_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1774,7 +1829,7 @@ func (x *AuthenticationServerAuthenticationRequest) ProtoReflect() protoreflect.
 
 // Deprecated: Use AuthenticationServerAuthenticationRequest.ProtoReflect.Descriptor instead.
 func (*AuthenticationServerAuthenticationRequest) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{25}
+	return file_messages_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *AuthenticationServerAuthenticationRequest) GetAccessKey() string {
@@ -1806,7 +1861,7 @@ type AuthenticationServerAuthenticationResponse struct {
 func (x *AuthenticationServerAuthenticationResponse) Reset() {
 	*x = AuthenticationServerAuthenticationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_messages_proto_msgTypes[26]
+		mi := &file_messages_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1819,7 +1874,7 @@ func (x *AuthenticationServerAuthenticationResponse) String() string {
 func (*AuthenticationServerAuthenticationResponse) ProtoMessage() {}
 
 func (x *AuthenticationServerAuthenticationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_messages_proto_msgTypes[26]
+	mi := &file_messages_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1832,7 +1887,7 @@ func (x *AuthenticationServerAuthenticationResponse) ProtoReflect() protoreflect
 
 // Deprecated: Use AuthenticationServerAuthenticationResponse.ProtoReflect.Descriptor instead.
 func (*AuthenticationServerAuthenticationResponse) Descriptor() ([]byte, []int) {
-	return file_messages_proto_rawDescGZIP(), []int{26}
+	return file_messages_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *AuthenticationServerAuthenticationResponse) GetSuccess() bool {
@@ -1973,7 +2028,7 @@ var file_messages_proto_rawDesc = []byte{
 	0x5f, 0x6d, 0x65, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6d, 0x65, 0x63,
 	0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4d, 0x45, 0x43, 0x53,
 	0x65, 0x72, 0x76, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x07, 0x68, 0x6f, 0x6d, 0x65, 0x4d,
-	0x65, 0x63, 0x22, 0xca, 0x01, 0x0a, 0x29, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4d, 0x61,
+	0x65, 0x63, 0x22, 0xf4, 0x01, 0x0a, 0x29, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4d, 0x61,
 	0x6e, 0x61, 0x67, 0x65, 0x72, 0x41, 0x70, 0x69, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x67, 0x69,
 	0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
@@ -1984,56 +2039,67 @@ var file_messages_proto_rawDesc = []byte{
 	0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32,
 	0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e, 0x6f,
 	0x64, 0x65, 0x52, 0x0b, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x12,
-	0x1e, 0x0a, 0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x0c, 0x52, 0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x22,
-	0xcf, 0x01, 0x0a, 0x0c, 0x50, 0x68, 0x79, 0x73, 0x69, 0x63, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65,
-	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
-	0x12, 0x34, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x08, 0x6c, 0x6f,
-	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x35, 0x0a, 0x09, 0x6e, 0x6f, 0x64, 0x65, 0x5f, 0x74,
-	0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x63, 0x6d,
-	0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x54,
-	0x79, 0x70, 0x65, 0x52, 0x08, 0x6e, 0x6f, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x21, 0x0a,
-	0x0c, 0x71, 0x75, 0x69, 0x63, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x0b, 0x71, 0x75, 0x69, 0x63, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x12, 0x1f, 0x0a, 0x0b, 0x75, 0x64, 0x70, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18,
-	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x75, 0x64, 0x70, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x22, 0x8a, 0x02, 0x0a, 0x0b, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e, 0x6f, 0x64,
-	0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
-	0x64, 0x12, 0x34, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x08, 0x6c,
-	0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x35, 0x0a, 0x09, 0x6e, 0x6f, 0x64, 0x65, 0x5f,
-	0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x63,
-	0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x6f, 0x64, 0x65,
-	0x54, 0x79, 0x70, 0x65, 0x52, 0x08, 0x6e, 0x6f, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x3b,
-	0x0a, 0x0b, 0x68, 0x6f, 0x6d, 0x65, 0x5f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52,
-	0x0a, 0x68, 0x6f, 0x6d, 0x65, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x41, 0x0a, 0x0e, 0x66,
-	0x6f, 0x72, 0x65, 0x69, 0x67, 0x6e, 0x5f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x18, 0x05, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52,
-	0x0d, 0x66, 0x6f, 0x72, 0x65, 0x69, 0x67, 0x6e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x22, 0x50,
-	0x0a, 0x0a, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x21, 0x0a, 0x0c,
-	0x71, 0x75, 0x69, 0x63, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x0b, 0x71, 0x75, 0x69, 0x63, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12,
-	0x1f, 0x0a, 0x0b, 0x75, 0x64, 0x70, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x75, 0x64, 0x70, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
-	0x22, 0xca, 0x01, 0x0a, 0x25, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65,
-	0x41, 0x70, 0x69, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x41, 0x0a, 0x0d, 0x70, 0x68,
-	0x79, 0x73, 0x69, 0x63, 0x61, 0x6c, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x1c, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x2e, 0x50, 0x68, 0x79, 0x73, 0x69, 0x63, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x52,
-	0x0c, 0x70, 0x68, 0x79, 0x73, 0x69, 0x63, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x3e, 0x0a,
-	0x0c, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65,
-	0x52, 0x0b, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x1e, 0x0a,
-	0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x0c, 0x52, 0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x22, 0x67, 0x0a,
+	0x48, 0x0a, 0x10, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6b, 0x65, 0x79, 0x5f, 0x69,
+	0x6e, 0x66, 0x6f, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x6d, 0x65, 0x63, 0x6d,
+	0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x65, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0e, 0x73, 0x65, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0xcf, 0x01, 0x0a, 0x0c, 0x50, 0x68,
+	0x79, 0x73, 0x69, 0x63, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x34, 0x0a, 0x08, 0x6c, 0x6f,
+	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d,
+	0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4c, 0x6f,
+	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x12, 0x35, 0x0a, 0x09, 0x6e, 0x6f, 0x64, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x52, 0x08, 0x6e,
+	0x6f, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x71, 0x75, 0x69, 0x63, 0x5f,
+	0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x71,
+	0x75, 0x69, 0x63, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x75, 0x64,
+	0x70, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0a, 0x75, 0x64, 0x70, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x8a, 0x02, 0x0a, 0x0b,
+	0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x34, 0x0a, 0x08, 0x6c,
+	0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e,
+	0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4c,
+	0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x12, 0x35, 0x0a, 0x09, 0x6e, 0x6f, 0x64, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x52, 0x08,
+	0x6e, 0x6f, 0x64, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x3b, 0x0a, 0x0b, 0x68, 0x6f, 0x6d, 0x65,
+	0x5f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e,
+	0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4d,
+	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0a, 0x68, 0x6f, 0x6d, 0x65, 0x4d,
+	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x12, 0x41, 0x0a, 0x0e, 0x66, 0x6f, 0x72, 0x65, 0x69, 0x67, 0x6e,
+	0x5f, 0x6d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e,
+	0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4d,
+	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0d, 0x66, 0x6f, 0x72, 0x65, 0x69,
+	0x67, 0x6e, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x22, 0x5a, 0x0a, 0x0e, 0x53, 0x65, 0x73, 0x73,
+	0x69, 0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x65,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52,
+	0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x12, 0x27, 0x0a, 0x0f, 0x65,
+	0x78, 0x70, 0x69, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x65, 0x78, 0x70, 0x69, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x54, 0x69, 0x6d, 0x65, 0x22, 0x50, 0x0a, 0x0a, 0x4d, 0x6f, 0x64, 0x75, 0x6c, 0x65, 0x49, 0x6e,
+	0x66, 0x6f, 0x12, 0x21, 0x0a, 0x0c, 0x71, 0x75, 0x69, 0x63, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x71, 0x75, 0x69, 0x63, 0x41, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x75, 0x64, 0x70, 0x5f, 0x61, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x75, 0x64, 0x70, 0x41,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0xf4, 0x01, 0x0a, 0x25, 0x56, 0x69, 0x72, 0x74, 0x75,
+	0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x41, 0x70, 0x69, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x67,
+	0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x41, 0x0a, 0x0d, 0x70, 0x68, 0x79, 0x73, 0x69, 0x63, 0x61, 0x6c, 0x5f, 0x6e, 0x6f, 0x64,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d,
+	0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x50, 0x68, 0x79, 0x73, 0x69, 0x63, 0x61,
+	0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x0c, 0x70, 0x68, 0x79, 0x73, 0x69, 0x63, 0x61, 0x6c, 0x4e,
+	0x6f, 0x64, 0x65, 0x12, 0x3e, 0x0a, 0x0c, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x5f, 0x6e,
+	0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6d, 0x65, 0x63, 0x6d,
+	0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x56, 0x69, 0x72, 0x74, 0x75,
+	0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x0b, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e,
+	0x6f, 0x64, 0x65, 0x12, 0x48, 0x0a, 0x10, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x6b,
+	0x65, 0x79, 0x5f, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e,
+	0x6d, 0x65, 0x63, 0x6d, 0x32, 0x6d, 0x76, 0x32, 0x5f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53,
+	0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0e, 0x73,
+	0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x4b, 0x65, 0x79, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x67, 0x0a,
 	0x26, 0x56, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x4e, 0x6f, 0x64, 0x65, 0x41, 0x70, 0x69, 0x4e,
 	0x6f, 0x64, 0x65, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
@@ -2172,7 +2238,7 @@ func file_messages_proto_rawDescGZIP() []byte {
 }
 
 var file_messages_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
+var file_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_messages_proto_goTypes = []interface{}{
 	(NodeType)(0),                                      // 0: mecm2mv2_proto.NodeType
 	(DataType)(0),                                      // 1: mecm2mv2_proto.DataType
@@ -2187,56 +2253,59 @@ var file_messages_proto_goTypes = []interface{}{
 	(*VirtualManagerApiNodeRegistrationResponse)(nil),  // 10: mecm2mv2_proto.VirtualManagerApiNodeRegistrationResponse
 	(*PhysicalNode)(nil),                               // 11: mecm2mv2_proto.PhysicalNode
 	(*VirtualNode)(nil),                                // 12: mecm2mv2_proto.VirtualNode
-	(*ModuleInfo)(nil),                                 // 13: mecm2mv2_proto.ModuleInfo
-	(*VirtualNodeApiNodeRegistrationRequest)(nil),      // 14: mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest
-	(*VirtualNodeApiNodeRegistrationResponse)(nil),     // 15: mecm2mv2_proto.VirtualNodeApiNodeRegistrationResponse
-	(*VirtualNodeApiNodeUnregistrationRequest)(nil),    // 16: mecm2mv2_proto.VirtualNodeApiNodeUnregistrationRequest
-	(*VirtualNodeApiNodeUnregistrationResponse)(nil),   // 17: mecm2mv2_proto.VirtualNodeApiNodeUnregistrationResponse
-	(*VirtualNodeApiDataSubscriptionRequest)(nil),      // 18: mecm2mv2_proto.VirtualNodeApiDataSubscriptionRequest
-	(*VirtualNodeApiDataSubscriptionResponse)(nil),     // 19: mecm2mv2_proto.VirtualNodeApiDataSubscriptionResponse
-	(*DataMessage)(nil),                                // 20: mecm2mv2_proto.DataMessage
-	(*Location)(nil),                                   // 21: mecm2mv2_proto.Location
-	(*Area)(nil),                                       // 22: mecm2mv2_proto.Area
-	(*VirtualNodeApiUpdateSubscriptionRequest)(nil),    // 23: mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionRequest
-	(*VirtualNodeApiUpdateSubscriptionResponse)(nil),   // 24: mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionResponse
-	(*VirtualNodeApiCancelSubscriptionRequest)(nil),    // 25: mecm2mv2_proto.VirtualNodeApiCancelSubscriptionRequest
-	(*VirtualNodeApiCancelSubscriptionResponse)(nil),   // 26: mecm2mv2_proto.VirtualNodeApiCancelSubscriptionResponse
-	(*AuthenticationServerAuthenticationRequest)(nil),  // 27: mecm2mv2_proto.AuthenticationServerAuthenticationRequest
-	(*AuthenticationServerAuthenticationResponse)(nil), // 28: mecm2mv2_proto.AuthenticationServerAuthenticationResponse
+	(*SessionKeyInfo)(nil),                             // 13: mecm2mv2_proto.SessionKeyInfo
+	(*ModuleInfo)(nil),                                 // 14: mecm2mv2_proto.ModuleInfo
+	(*VirtualNodeApiNodeRegistrationRequest)(nil),      // 15: mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest
+	(*VirtualNodeApiNodeRegistrationResponse)(nil),     // 16: mecm2mv2_proto.VirtualNodeApiNodeRegistrationResponse
+	(*VirtualNodeApiNodeUnregistrationRequest)(nil),    // 17: mecm2mv2_proto.VirtualNodeApiNodeUnregistrationRequest
+	(*VirtualNodeApiNodeUnregistrationResponse)(nil),   // 18: mecm2mv2_proto.VirtualNodeApiNodeUnregistrationResponse
+	(*VirtualNodeApiDataSubscriptionRequest)(nil),      // 19: mecm2mv2_proto.VirtualNodeApiDataSubscriptionRequest
+	(*VirtualNodeApiDataSubscriptionResponse)(nil),     // 20: mecm2mv2_proto.VirtualNodeApiDataSubscriptionResponse
+	(*DataMessage)(nil),                                // 21: mecm2mv2_proto.DataMessage
+	(*Location)(nil),                                   // 22: mecm2mv2_proto.Location
+	(*Area)(nil),                                       // 23: mecm2mv2_proto.Area
+	(*VirtualNodeApiUpdateSubscriptionRequest)(nil),    // 24: mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionRequest
+	(*VirtualNodeApiUpdateSubscriptionResponse)(nil),   // 25: mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionResponse
+	(*VirtualNodeApiCancelSubscriptionRequest)(nil),    // 26: mecm2mv2_proto.VirtualNodeApiCancelSubscriptionRequest
+	(*VirtualNodeApiCancelSubscriptionResponse)(nil),   // 27: mecm2mv2_proto.VirtualNodeApiCancelSubscriptionResponse
+	(*AuthenticationServerAuthenticationRequest)(nil),  // 28: mecm2mv2_proto.AuthenticationServerAuthenticationRequest
+	(*AuthenticationServerAuthenticationResponse)(nil), // 29: mecm2mv2_proto.AuthenticationServerAuthenticationResponse
 }
 var file_messages_proto_depIdxs = []int32{
-	20, // 0: mecm2mv2_proto.UDPMessage.data_message:type_name -> mecm2mv2_proto.DataMessage
+	21, // 0: mecm2mv2_proto.UDPMessage.data_message:type_name -> mecm2mv2_proto.DataMessage
 	7,  // 1: mecm2mv2_proto.VirtualManagerAPI.node_search_request:type_name -> mecm2mv2_proto.VirtualManagerApiNodeSearchRequest
 	9,  // 2: mecm2mv2_proto.VirtualManagerAPI.node_registration_request:type_name -> mecm2mv2_proto.VirtualManagerApiNodeRegistrationRequest
-	18, // 3: mecm2mv2_proto.VirtualNodeAPI.data_subscription_request:type_name -> mecm2mv2_proto.VirtualNodeApiDataSubscriptionRequest
-	23, // 4: mecm2mv2_proto.VirtualNodeAPI.update_subscription_request:type_name -> mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionRequest
-	25, // 5: mecm2mv2_proto.VirtualNodeAPI.cancel_subscription_request:type_name -> mecm2mv2_proto.VirtualNodeApiCancelSubscriptionRequest
-	14, // 6: mecm2mv2_proto.VirtualNodeAPI.node_registration_request:type_name -> mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest
-	16, // 7: mecm2mv2_proto.VirtualNodeAPI.node_unregistration_request:type_name -> mecm2mv2_proto.VirtualNodeApiNodeUnregistrationRequest
-	27, // 8: mecm2mv2_proto.AuthenticationServerAPI.authentication_request:type_name -> mecm2mv2_proto.AuthenticationServerAuthenticationRequest
-	22, // 9: mecm2mv2_proto.VirtualManagerApiNodeSearchRequest.area:type_name -> mecm2mv2_proto.Area
+	19, // 3: mecm2mv2_proto.VirtualNodeAPI.data_subscription_request:type_name -> mecm2mv2_proto.VirtualNodeApiDataSubscriptionRequest
+	24, // 4: mecm2mv2_proto.VirtualNodeAPI.update_subscription_request:type_name -> mecm2mv2_proto.VirtualNodeApiUpdateSubscriptionRequest
+	26, // 5: mecm2mv2_proto.VirtualNodeAPI.cancel_subscription_request:type_name -> mecm2mv2_proto.VirtualNodeApiCancelSubscriptionRequest
+	15, // 6: mecm2mv2_proto.VirtualNodeAPI.node_registration_request:type_name -> mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest
+	17, // 7: mecm2mv2_proto.VirtualNodeAPI.node_unregistration_request:type_name -> mecm2mv2_proto.VirtualNodeApiNodeUnregistrationRequest
+	28, // 8: mecm2mv2_proto.AuthenticationServerAPI.authentication_request:type_name -> mecm2mv2_proto.AuthenticationServerAuthenticationRequest
+	23, // 9: mecm2mv2_proto.VirtualManagerApiNodeSearchRequest.area:type_name -> mecm2mv2_proto.Area
 	12, // 10: mecm2mv2_proto.VirtualManagerApiNodeSearchResponse.nodes:type_name -> mecm2mv2_proto.VirtualNode
 	11, // 11: mecm2mv2_proto.VirtualManagerApiNodeRegistrationRequest.physical_node:type_name -> mecm2mv2_proto.PhysicalNode
 	2,  // 12: mecm2mv2_proto.VirtualManagerApiNodeRegistrationRequest.home_mec:type_name -> mecm2mv2_proto.MECServerInfo
 	12, // 13: mecm2mv2_proto.VirtualManagerApiNodeRegistrationResponse.virtual_node:type_name -> mecm2mv2_proto.VirtualNode
-	21, // 14: mecm2mv2_proto.PhysicalNode.location:type_name -> mecm2mv2_proto.Location
-	0,  // 15: mecm2mv2_proto.PhysicalNode.node_type:type_name -> mecm2mv2_proto.NodeType
-	21, // 16: mecm2mv2_proto.VirtualNode.location:type_name -> mecm2mv2_proto.Location
-	0,  // 17: mecm2mv2_proto.VirtualNode.node_type:type_name -> mecm2mv2_proto.NodeType
-	13, // 18: mecm2mv2_proto.VirtualNode.home_module:type_name -> mecm2mv2_proto.ModuleInfo
-	13, // 19: mecm2mv2_proto.VirtualNode.foreign_module:type_name -> mecm2mv2_proto.ModuleInfo
-	11, // 20: mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest.physical_node:type_name -> mecm2mv2_proto.PhysicalNode
-	12, // 21: mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest.virtual_node:type_name -> mecm2mv2_proto.VirtualNode
-	1,  // 22: mecm2mv2_proto.VirtualNodeApiDataSubscriptionRequest.data_type:type_name -> mecm2mv2_proto.DataType
-	1,  // 23: mecm2mv2_proto.DataMessage.data_type:type_name -> mecm2mv2_proto.DataType
-	21, // 24: mecm2mv2_proto.Area.south_east:type_name -> mecm2mv2_proto.Location
-	21, // 25: mecm2mv2_proto.Area.north_west:type_name -> mecm2mv2_proto.Location
-	2,  // 26: mecm2mv2_proto.AuthenticationServerAuthenticationRequest.home_mec:type_name -> mecm2mv2_proto.MECServerInfo
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	13, // 14: mecm2mv2_proto.VirtualManagerApiNodeRegistrationResponse.session_key_info:type_name -> mecm2mv2_proto.SessionKeyInfo
+	22, // 15: mecm2mv2_proto.PhysicalNode.location:type_name -> mecm2mv2_proto.Location
+	0,  // 16: mecm2mv2_proto.PhysicalNode.node_type:type_name -> mecm2mv2_proto.NodeType
+	22, // 17: mecm2mv2_proto.VirtualNode.location:type_name -> mecm2mv2_proto.Location
+	0,  // 18: mecm2mv2_proto.VirtualNode.node_type:type_name -> mecm2mv2_proto.NodeType
+	14, // 19: mecm2mv2_proto.VirtualNode.home_module:type_name -> mecm2mv2_proto.ModuleInfo
+	14, // 20: mecm2mv2_proto.VirtualNode.foreign_module:type_name -> mecm2mv2_proto.ModuleInfo
+	11, // 21: mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest.physical_node:type_name -> mecm2mv2_proto.PhysicalNode
+	12, // 22: mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest.virtual_node:type_name -> mecm2mv2_proto.VirtualNode
+	13, // 23: mecm2mv2_proto.VirtualNodeApiNodeRegistrationRequest.session_key_info:type_name -> mecm2mv2_proto.SessionKeyInfo
+	1,  // 24: mecm2mv2_proto.VirtualNodeApiDataSubscriptionRequest.data_type:type_name -> mecm2mv2_proto.DataType
+	1,  // 25: mecm2mv2_proto.DataMessage.data_type:type_name -> mecm2mv2_proto.DataType
+	22, // 26: mecm2mv2_proto.Area.south_east:type_name -> mecm2mv2_proto.Location
+	22, // 27: mecm2mv2_proto.Area.north_west:type_name -> mecm2mv2_proto.Location
+	2,  // 28: mecm2mv2_proto.AuthenticationServerAuthenticationRequest.home_mec:type_name -> mecm2mv2_proto.MECServerInfo
+	29, // [29:29] is the sub-list for method output_type
+	29, // [29:29] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_messages_proto_init() }
@@ -2378,7 +2447,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ModuleInfo); i {
+			switch v := v.(*SessionKeyInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2390,7 +2459,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiNodeRegistrationRequest); i {
+			switch v := v.(*ModuleInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2402,7 +2471,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiNodeRegistrationResponse); i {
+			switch v := v.(*VirtualNodeApiNodeRegistrationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2414,7 +2483,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiNodeUnregistrationRequest); i {
+			switch v := v.(*VirtualNodeApiNodeRegistrationResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2426,7 +2495,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiNodeUnregistrationResponse); i {
+			switch v := v.(*VirtualNodeApiNodeUnregistrationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2438,7 +2507,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiDataSubscriptionRequest); i {
+			switch v := v.(*VirtualNodeApiNodeUnregistrationResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2450,7 +2519,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiDataSubscriptionResponse); i {
+			switch v := v.(*VirtualNodeApiDataSubscriptionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2462,7 +2531,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DataMessage); i {
+			switch v := v.(*VirtualNodeApiDataSubscriptionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2474,7 +2543,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Location); i {
+			switch v := v.(*DataMessage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2486,7 +2555,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Area); i {
+			switch v := v.(*Location); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2498,7 +2567,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiUpdateSubscriptionRequest); i {
+			switch v := v.(*Area); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2510,7 +2579,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiUpdateSubscriptionResponse); i {
+			switch v := v.(*VirtualNodeApiUpdateSubscriptionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2522,7 +2591,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiCancelSubscriptionRequest); i {
+			switch v := v.(*VirtualNodeApiUpdateSubscriptionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2534,7 +2603,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VirtualNodeApiCancelSubscriptionResponse); i {
+			switch v := v.(*VirtualNodeApiCancelSubscriptionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2546,7 +2615,7 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthenticationServerAuthenticationRequest); i {
+			switch v := v.(*VirtualNodeApiCancelSubscriptionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2558,6 +2627,18 @@ func file_messages_proto_init() {
 			}
 		}
 		file_messages_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AuthenticationServerAuthenticationRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_messages_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AuthenticationServerAuthenticationResponse); i {
 			case 0:
 				return &v.state
@@ -2593,7 +2674,7 @@ func file_messages_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_messages_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   27,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -67,7 +67,7 @@ message VirtualManagerApiNodeRegistrationResponse {
   bool success = 1;
   string error_message = 2;
   VirtualNode virtual_node = 3;
-  bytes sessionKey = 4;
+  SessionKeyInfo session_key_info = 4;
 }
 
 message PhysicalNode {
@@ -86,6 +86,11 @@ message VirtualNode {
   ModuleInfo foreign_module = 5;
 }
 
+message SessionKeyInfo {
+  bytes session_key = 1;
+  int64 expiration_time = 2; // Unix timestamp in milliseconds
+}
+
 message ModuleInfo {
   string quic_address = 1;
   string udp_address = 2;
@@ -100,8 +105,7 @@ enum NodeType {
 message VirtualNodeApiNodeRegistrationRequest {
   PhysicalNode physical_node = 1;
   VirtualNode virtual_node = 2;
-  bytes sessionKey = 3;
-  int64 sessionKey_expiration_time = 4; // Unixタイムスタンプ（ミリ秒）
+  SessionKeyInfo session_key_info = 3;
 }
 
 message VirtualNodeApiNodeRegistrationResponse {
