@@ -101,6 +101,7 @@ message VirtualNodeApiNodeRegistrationRequest {
   PhysicalNode physical_node = 1;
   VirtualNode virtual_node = 2;
   bytes sessionKey = 3;
+  int64 sessionKey_expiration_time = 4; // Unixタイムスタンプ（ミリ秒）
 }
 
 message VirtualNodeApiNodeRegistrationResponse {
