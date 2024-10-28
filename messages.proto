@@ -191,7 +191,6 @@ message AuthenticationServerAuthenticationRequest {
 // 認証レスポンスメッセージ
 message AuthenticationServerAuthenticationResponse {
   bool success = 1;
-  bytes session_key = 2; // 修正: string から bytes へ
-  int64 expiration_time = 3; // Unixタイムスタンプ（ミリ秒）
-  string error_message = 4;
+  SessionKeyInfo session_key_info = 2;
+  string error_message = 3;
 }
