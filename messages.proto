@@ -144,7 +144,7 @@ message DataMessage {
   DataType data_type = 3; // データタイプを追加
 
   oneof data_content {
-    LocationData location = 4;
+    LocationData location_data = 4;
     TemperatureData temperature_data = 5;
     HumidityData humidity_data = 6;
     PressureData pressure_data = 7;
