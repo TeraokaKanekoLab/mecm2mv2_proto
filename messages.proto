@@ -1,5 +1,6 @@
 syntax = "proto3";
 package mecm2mv2_proto;
+import "google/protobuf/timestamp.proto";
 
 option go_package = "./;mecm2mv2_proto";
 
@@ -126,7 +127,7 @@ message VirtualNodeApiNodeUnregistrationResponse {
 message VirtualNodeApiDataSubscriptionRequest {
   string node_id = 1;
   string udp_address = 2;
-  DataType data_type = 3;
+  repeated DataType data_types = 3; // 複数のデータタイプを指定
   int32 min_interval_ms = 4;
   int64 expiration_time = 5; // Unixタイムスタンプ（ミリ秒）
 }
@@ -139,8 +140,42 @@ message VirtualNodeApiDataSubscriptionResponse {
 
 message DataMessage {
   string node_id = 1;
-  bytes data = 2;
-  DataType data_type = 3; // 追加: データ型
+  google.protobuf.Timestamp timestamp = 2;
+  DataType data_type = 3; // データタイプを追加
+
+  oneof data_content {
+    LocationData location = 4;
+    TemperatureData temperature_data = 5;
+    HumidityData humidity_data = 6;
+    PressureData pressure_data = 7;
+    // 必要に応じて他のデータ型を追加
+  }
+}
+
+enum DataType {
+  ALL = 0;
+  LOCATION = 1;
+  TEMPERATURE = 2;
+  HUMIDITY = 3;
+  PRESSURE = 4;
+  // 必要に応じて他のデータ型を追加
+}
+
+message LocationData {
+  double lat = 1;
+  double lon = 2;
+}
+
+message TemperatureData {
+  float temperature = 1;
+}
+
+message HumidityData {
+  float humidity = 1;
+}
+
+message PressureData {
+  float pressure = 1;
 }
 
 message Location {
@@ -151,15 +186,6 @@ message Location {
 message Area {
   Location south_east = 1;
   Location north_west = 2;
-}
-
-enum DataType {
-  ALL = 0;
-  LOCATION = 1;
-  TEMPERATURE = 2;
-  HUMIDITY = 3;
-  PRESSURE = 4;
-  // 必要に応じて他のデータ型を追加
 }
 
 message VirtualNodeApiUpdateSubscriptionRequest {
