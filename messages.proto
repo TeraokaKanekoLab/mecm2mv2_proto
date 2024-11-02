@@ -8,6 +8,7 @@ message MECServerInfo {
   string ip_address = 2;
   int32 virtual_manager_port = 3;
   int32 authentication_server_port = 4;
+  Area coverage_area = 5;
 }
 
 message UDPMessage {
