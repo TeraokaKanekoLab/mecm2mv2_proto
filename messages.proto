@@ -127,7 +127,7 @@ message VirtualNodeApiNodeUnregistrationResponse {
 message VirtualNodeApiDataSubscriptionRequest {
   string node_id = 1;
   string udp_address = 2;
-  repeated DataType data_types = 3; // 複数のデータタイプを指定
+  DataType data_type = 3; // 複数のデータタイプを指定
   int32 min_interval_ms = 4;
   int64 expiration_time = 5; // Unixタイムスタンプ（ミリ秒）
 }
