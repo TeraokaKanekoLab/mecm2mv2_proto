@@ -26,8 +26,8 @@ message VirtualManagerAPI {
   oneof message {
       VirtualManagerApiNodeSearchRequest node_search_request = 1;
       VirtualManagerApiNodeRegistrationRequest node_registration_request = 2;
-      // VirtualManagerApiPreMigrationRequest  premigration_request = 3;
-      // VirtualManagerApiMigrationRequest migration_request = 4;
+      VirtualManagerApiPreMigrationRequest  premigration_request = 3;
+      VirtualManagerApiMigrationRequest migration_request = 4;
   }
 }
 
@@ -70,6 +70,28 @@ message VirtualManagerApiNodeRegistrationResponse {
   string error_message = 2;
   VirtualNode virtual_node = 3;
   SessionKeyInfo session_key_info = 4;
+}
+
+message VirtualManagerApiPreMigrationRequest {
+  PhysicalNode physical_node = 1;
+  string access_key = 2;
+  MECServerInfo home_mec = 3;
+}
+
+message VirtualManagerApiPreMigrationResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message VirtualManagerApiMigrationRequest {
+  PhysicalNode physical_node = 1;
+  string access_key = 2;
+  MECServerInfo home_mec = 3;
+}
+
+message VirtualManagerApiMigrationResponse {
+  bool success = 1;
+  string error_message = 2;
 }
 
 message PhysicalNode {
