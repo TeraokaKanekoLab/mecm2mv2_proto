@@ -4,6 +4,11 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "./;mecm2mv2_proto";
 
+message NodeInfo {
+  PhysicalNode physical_node = 1;
+  VirtualNode virtual_node = 2;
+}
+
 message MECServerInfo {
   string id = 1;
   string ip_address = 2;
@@ -127,9 +132,8 @@ enum NodeType {
 }
 
 message VirtualNodeApiNodeRegistrationRequest {
-  PhysicalNode physical_node = 1;
-  VirtualNode virtual_node = 2;
-  SessionKeyInfo session_key_info = 3;
+  NodeInfo node_info = 1;
+  SessionKeyInfo session_key_info = 2;
 }
 
 message VirtualNodeApiNodeRegistrationResponse {
