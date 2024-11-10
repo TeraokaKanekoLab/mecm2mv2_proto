@@ -31,7 +31,7 @@ message VirtualManagerAPI {
   oneof message {
       VirtualManagerApiNodeSearchRequest node_search_request = 1;
       VirtualManagerApiNodeRegistrationRequest node_registration_request = 2;
-      VirtualManagerApiPreMigrationRequest  premigration_request = 3;
+      VirtualManagerApiPreMigrationRequest  pre_migration_request = 3;
       VirtualManagerApiMigrationRequest migration_request = 4;
   }
 }
