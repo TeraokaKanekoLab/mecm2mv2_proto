@@ -78,9 +78,8 @@ message VirtualManagerApiNodeRegistrationResponse {
 }
 
 message VirtualManagerApiPreMigrationRequest {
-  PhysicalNode physical_node = 1;
-  string access_key = 2;
-  MECServerInfo home_mec = 3;
+  NodeInfo node_info = 1;
+  SessionKeyInfo session_key_info = 2;
 }
 
 message VirtualManagerApiPreMigrationResponse {
@@ -89,9 +88,8 @@ message VirtualManagerApiPreMigrationResponse {
 }
 
 message VirtualManagerApiMigrationRequest {
-  PhysicalNode physical_node = 1;
-  string access_key = 2;
-  MECServerInfo home_mec = 3;
+  NodeInfo node_info = 1;
+  SessionKeyInfo session_key_info = 2;
 }
 
 message VirtualManagerApiMigrationResponse {
