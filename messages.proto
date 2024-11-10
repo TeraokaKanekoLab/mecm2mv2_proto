@@ -113,6 +113,8 @@ message VirtualNode {
   NodeType node_type = 3;
   ModuleInfo home_module = 4;
   ModuleInfo foreign_module = 5;
+  MECServerInfo home_mec = 6;
+  MECServerInfo foreign_mec = 7;
 }
 
 message SessionKeyInfo {
