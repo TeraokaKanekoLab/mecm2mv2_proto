@@ -136,7 +136,7 @@ enum NodeType {
 }
 
 message VirtualNodeApiNodeRegistrationRequest {
-  NodeInfo node_info = 1;
+  VirtualNode virtualNode = 1;
   SessionKeyInfo session_key_info = 2;
 }
 
