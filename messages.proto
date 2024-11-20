@@ -45,6 +45,8 @@ message VirtualNodeAPI {
       // ... 他の既存のメッセージ ...
       VirtualNodeApiNodeRegistrationRequest node_registration_request = 4;
       VirtualNodeApiNodeUnregistrationRequest node_unregistration_request = 5;
+
+      VirtualNodeApiMigrationRequest migration_request = 6;
       // VirtualNodeApiActuateRequest actuate_request = 5;
       // VirtualNodeApiGetPastDataRequest get_past_data_request = 6;
   }
@@ -163,6 +165,16 @@ message VirtualNodeApiDataSubscriptionResponse {
   bool success = 1;
   string error_message = 2;
   string subscription_id = 3; // 追加: サブスクリプションID
+}
+
+message VirtualNodeApiMigrationRequest {
+  NodeInfo node_info = 1;
+  MECServerInfo next_mec = 2;
+}
+
+message VirtualNodeApiMigrationResponse {
+  bool success = 1;
+  string error_message = 2;
 }
 
 message DataMessage {
