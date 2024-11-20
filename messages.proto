@@ -88,6 +88,7 @@ message VirtualManagerApiPreMigrationRequest {
 message VirtualManagerApiPreMigrationResponse {
   bool success = 1;
   string error_message = 2;
+  VirtualNode virtual_node = 3;
 }
 
 message VirtualManagerApiMigrationRequest {
