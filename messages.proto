@@ -136,7 +136,7 @@ enum NodeType {
 }
 
 message VirtualNodeApiNodeRegistrationRequest {
-  VirtualNode virtualNode = 1;
+  NodeInfo node_info = 1;
   SessionKeyInfo session_key_info = 2;
 }
 
@@ -169,7 +169,7 @@ message VirtualNodeApiDataSubscriptionResponse {
 }
 
 message VirtualNodeApiMigrationRequest {
-  NodeInfo node_info = 1;
+  VirtualNode virtual_node = 1;
   MECServerInfo next_mec = 2;
 }
 
