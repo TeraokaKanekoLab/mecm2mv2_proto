@@ -107,8 +107,8 @@ message PhysicalNode {
   Location location = 2;
   NodeType node_type = 3;
   string ip_address = 4;
-  int32 virtual_manager_quic_port = 5;
-  int32 virtual_manager_udp_port = 6;
+  int32 quic_port = 5;
+  int32 udp_port = 6;
 }
 
 message VirtualNode {
