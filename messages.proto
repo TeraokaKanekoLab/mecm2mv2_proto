@@ -229,9 +229,9 @@ message Location {
 
 message VehicleData {
   Location location = 1;
-  float speed = 2;
-  float acceleration = 3;
-  float angle = 4;
+  double speed = 2;
+  double acceleration = 3;
+  double angle = 4;
 }
 
 message Area {
