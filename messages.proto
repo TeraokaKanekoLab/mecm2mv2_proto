@@ -201,6 +201,7 @@ enum DataType {
   HUMIDITY = 3;
   PRESSURE = 4;
   // 必要に応じて他のデータ型を追加
+  VEHICLE_DATA = 5;
 }
 
 message LocationData {
@@ -223,6 +224,13 @@ message PressureData {
 message Location {
   double lat = 1;
   double lon = 2;
+}
+
+message VehicleData {
+  Location location = 1;
+  float speed = 2;
+  float acceleration = 3;
+  float angle = 4;
 }
 
 message Area {
