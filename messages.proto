@@ -190,6 +190,7 @@ message DataMessage {
     TemperatureData temperature_data = 5;
     HumidityData humidity_data = 6;
     PressureData pressure_data = 7;
+    VehicleData vehicle_data = 8;
     // 必要に応じて他のデータ型を追加
   }
 }
