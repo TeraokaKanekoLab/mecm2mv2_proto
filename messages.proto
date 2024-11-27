@@ -105,6 +105,7 @@ message VirtualManagerApiPreMigrationResponse {
 message VirtualManagerApiMigrationRequest {
   NodeInfo node_info = 1;
   SessionKeyInfo session_key_info = 2;
+  repeated Subscription subscriptions = 3;
 }
 
 message VirtualManagerApiMigrationResponse {
@@ -151,6 +152,7 @@ enum NodeType {
 message VirtualNodeApiNodeRegistrationRequest {
   NodeInfo node_info = 1;
   SessionKeyInfo session_key_info = 2;
+  repeated Subscription subscriptions = 3;
 }
 
 message VirtualNodeApiNodeRegistrationResponse {
