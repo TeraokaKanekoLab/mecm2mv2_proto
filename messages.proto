@@ -18,6 +18,15 @@ message MECServerInfo {
   Area coverage_area = 6;
 }
 
+message Subscription {
+  string id = 1;
+  string node_id = 2;
+  string udp_address = 3;
+  DataType data_type = 4;
+  int32 min_interval_ms = 5;
+  int64 expiration_time = 6;
+}
+
 message UDPMessage {
   oneof message {
     DataMessage data_message = 1;
@@ -47,6 +56,7 @@ message VirtualNodeAPI {
       VirtualNodeApiNodeUnregistrationRequest node_unregistration_request = 5;
 
       VirtualNodeApiMigrationRequest migration_request = 6;
+      VirtualNodeApiGetSubscriptionRequest get_subscription_request = 7;
       // VirtualNodeApiActuateRequest actuate_request = 5;
       // VirtualNodeApiGetPastDataRequest get_past_data_request = 6;
   }
@@ -178,6 +188,14 @@ message VirtualNodeApiMigrationRequest {
 message VirtualNodeApiMigrationResponse {
   bool success = 1;
   string error_message = 2;
+}
+
+message VirtualNodeApiGetSubscriptionRequest {
+  string node_id = 1;
+}
+
+message VirtualNodeApiGetSubscriptionResponse {
+  repeated Subscription subscriptions = 1;
 }
 
 message DataMessage {
