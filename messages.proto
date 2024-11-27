@@ -25,6 +25,7 @@ message Subscription {
   DataType data_type = 4;
   int32 min_interval_ms = 5;
   int64 expiration_time = 6;
+  int64 last_sent_time = 7;
 }
 
 message UDPMessage {
