@@ -121,7 +121,6 @@ message PhysicalNode {
   string ip_address = 4;
   int32 quic_port = 5;
   int32 udp_port = 6;
-  google.protobuf.Timestamp timestamp = 7;
 }
 
 message VirtualNode {
@@ -132,6 +131,7 @@ message VirtualNode {
   ModuleInfo foreign_module = 5;
   MECServerInfo home_mec = 6;
   MECServerInfo foreign_mec = 7;
+  google.protobuf.Timestamp lastUpdated = 8;
 }
 
 message SessionKeyInfo {
