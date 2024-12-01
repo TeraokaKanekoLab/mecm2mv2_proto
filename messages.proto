@@ -195,7 +195,7 @@ message VirtualNodeApiMigrationResponse {
 }
 
 message VirtualNodeApiGetSubscriptionRequest {
-  string node_id = 1;
+  VirtualNode VirtualNode = 1;
 }
 
 message VirtualNodeApiGetSubscriptionResponse {
