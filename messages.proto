@@ -44,6 +44,7 @@ message VirtualManagerAPI {
       VirtualManagerApiNodeRegistrationRequest node_registration_request = 2;
       VirtualManagerApiPreMigrationRequest  pre_migration_request = 3;
       VirtualManagerApiMigrationRequest migration_request = 4;
+      VirtualManagerApiGetPastDataRequest get_past_data_request = 5;
   }
 }
 
@@ -59,7 +60,7 @@ message VirtualNodeAPI {
       VirtualNodeApiMigrationRequest migration_request = 6;
       VirtualNodeApiGetSubscriptionRequest get_subscription_request = 7;
       // VirtualNodeApiActuateRequest actuate_request = 5;
-      // VirtualNodeApiGetPastDataRequest get_past_data_request = 6;
+      VirtualNodeApiGetPastDataRequest get_past_data_request = 8;
   }
 }
 
@@ -112,6 +113,20 @@ message VirtualManagerApiMigrationResponse {
   bool success = 1;
   string error_message = 2;
   VirtualNode virtual_node = 3;
+}
+
+message VirtualManagerApiGetPastDataRequest {
+  string node_id = 1;
+  DataType data_type = 2;
+  google.protobuf.Timestamp start_time = 3;
+  google.protobuf.Timestamp end_time = 4;
+  Area area = 5;
+}
+
+message VirtualManagerApiGetPastDataResponse {
+  bool success = 1;
+  string error_message = 2;
+  repeated DataMessage data_messages = 3;
 }
 
 message PhysicalNode {
@@ -200,6 +215,20 @@ message VirtualNodeApiGetSubscriptionRequest {
 
 message VirtualNodeApiGetSubscriptionResponse {
   repeated Subscription subscriptions = 1;
+}
+
+message VirtualNodeApiGetPastDataRequest {
+  string node_id = 1;
+  DataType data_type = 2;
+  google.protobuf.Timestamp start_time = 3;
+  google.protobuf.Timestamp end_time = 4;
+  Area area = 5;
+}
+
+message VirtualNodeApiGetPastDataResponse {
+  bool success = 1;
+  string error_message = 2;
+  repeated DataMessage data_messages = 3;
 }
 
 message DataMessage {
