@@ -59,8 +59,8 @@ message VirtualNodeAPI {
 
       VirtualNodeApiMigrationRequest migration_request = 6;
       VirtualNodeApiGetSubscriptionRequest get_subscription_request = 7;
-      // VirtualNodeApiActuateRequest actuate_request = 5;
       VirtualNodeApiGetPastDataRequest get_past_data_request = 8;
+      VirtualNodeApiActuateRequest actuate_request = 9;
   }
 }
 
@@ -127,6 +127,27 @@ message VirtualManagerApiGetPastDataResponse {
   bool success = 1;
   string error_message = 2;
   repeated DataMessage data_messages = 3;
+}
+
+message VirtualNodeApiActuateRequest {
+  oneof actuation {
+    VehicleActuationBrakeRequest vehicle_actuation_brake = 1;
+  }
+}
+
+message VirtualNodeApiActuateResponse {
+  oneof actuation {
+    VehicleActuationBrakeResponse vehicle_actuation_brake = 1;
+  }
+}
+
+message VehicleActuationBrakeRequest {
+  double brake_force = 1;
+}
+
+message VehicleActuationBrakeResponse {
+  bool success = 1;
+  string error_message = 2;
 }
 
 message PhysicalNode {
