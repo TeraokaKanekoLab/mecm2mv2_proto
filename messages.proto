@@ -130,13 +130,13 @@ message VirtualManagerApiGetPastDataResponse {
 }
 
 message VirtualNodeApiActuateRequest {
-  oneof actuation {
+  oneof request {
     VehicleActuationBrakeRequest vehicle_actuation_brake = 1;
   }
 }
 
 message VirtualNodeApiActuateResponse {
-  oneof actuation {
+  oneof response {
     VehicleActuationBrakeResponse vehicle_actuation_brake = 1;
   }
 }
