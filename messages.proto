@@ -26,6 +26,7 @@ message Subscription {
   int32 min_interval_ms = 5;
   int64 expiration_time = 6;
   int64 last_sent_time = 7;
+  Area area = 8;
 }
 
 message UDPMessage {
@@ -138,6 +139,7 @@ message VirtualManagerApiDataSubscriptionRequest {
   DataType data_type = 3; // 複数のデータタイプを指定
   int32 min_interval_ms = 4;
   int64 expiration_time = 5; // Unixタイムスタンプ（ミリ秒）
+  Area area = 6;
 }
 
 message VirtualManagerApiDataSubscriptionResponse {
@@ -151,6 +153,7 @@ message VirtualManagerApiUpdateSubscriptionRequest {
   string new_udp_address = 2; // オプション：新しいUDPアドレス
   int32 new_min_interval_ms = 3; // オプション：新しい最小間隔
   int64 new_expiration_time = 4; // オプション：新しい有効期限（Unixタイムスタンプ、ミリ秒）
+  Area area = 5;
 }
 
 message VirtualManagerApiUpdateSubscriptionResponse {
