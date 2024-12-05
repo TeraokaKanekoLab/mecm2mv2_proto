@@ -45,6 +45,9 @@ message VirtualManagerAPI {
       VirtualManagerApiPreMigrationRequest  pre_migration_request = 3;
       VirtualManagerApiMigrationRequest migration_request = 4;
       VirtualManagerApiGetPastDataRequest get_past_data_request = 5;
+      VirtualManagerApiDataSubscriptionRequest data_subscription_request = 6;
+      VirtualManagerApiUpdateSubscriptionRequest update_subscription_request = 7;
+      VirtualManagerApiCancelSubscriptionRequest cancel_subscription_request = 8;
   }
 }
 
@@ -128,6 +131,42 @@ message VirtualManagerApiGetPastDataResponse {
   string error_message = 2;
   repeated DataMessage data_messages = 3;
 }
+
+message VirtualManagerApiDataSubscriptionRequest {
+  string node_id = 1;
+  string udp_address = 2;
+  DataType data_type = 3; // 複数のデータタイプを指定
+  int32 min_interval_ms = 4;
+  int64 expiration_time = 5; // Unixタイムスタンプ（ミリ秒）
+}
+
+message VirtualManagerApiDataSubscriptionResponse {
+  bool success = 1;
+  string error_message = 2;
+  string subscription_id = 3; // 追加: サブスクリプションID
+}
+
+message VirtualManagerApiUpdateSubscriptionRequest {
+  string subscription_id = 1;
+  string new_udp_address = 2; // オプション：新しいUDPアドレス
+  int32 new_min_interval_ms = 3; // オプション：新しい最小間隔
+  int64 new_expiration_time = 4; // オプション：新しい有効期限（Unixタイムスタンプ、ミリ秒）
+}
+
+message VirtualManagerApiUpdateSubscriptionResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+message VirtualManagerApiCancelSubscriptionRequest {
+  string subscription_id = 1;
+}
+
+message VirtualManagerApiCancelSubscriptionResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
 
 message VirtualNodeApiActuateRequest {
   string node_id = 1;
