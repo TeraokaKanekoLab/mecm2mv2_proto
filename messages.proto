@@ -125,12 +125,14 @@ message VirtualManagerApiGetPastDataRequest {
   google.protobuf.Timestamp start_time = 3;
   google.protobuf.Timestamp end_time = 4;
   Area area = 5;
+  string request_id = 6;
 }
 
 message VirtualManagerApiGetPastDataResponse {
   bool success = 1;
   string error_message = 2;
   repeated DataMessage data_messages = 3;
+  string request_id = 4;
 }
 
 message VirtualManagerApiDataSubscriptionRequest {
