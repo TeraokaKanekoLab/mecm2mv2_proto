@@ -178,7 +178,6 @@ message VirtualNodeApiActuateRequest {
   string request_id = 2;
   oneof request {
     VehicleActuationBrakeRequest vehicle_actuation_brake = 3;
-    VehicleActuationWarningRequest vehicle_actuation_warning = 4;
   }
 }
 
@@ -186,7 +185,6 @@ message VirtualNodeApiActuateResponse {
   string request_id = 1;
   oneof response {
     VehicleActuationBrakeResponse vehicle_actuation_brake = 2;
-    VehicleActuationWarningResponse vehicle_actuation_warning = 3;
   }
 }
 
@@ -194,16 +192,7 @@ message VehicleActuationBrakeRequest {
   double brake_force = 1;
 }
 
-message VehicleActuationWarningRequest {
-  string warning_message = 1;
-}
-
 message VehicleActuationBrakeResponse {
-  bool success = 1;
-  string error_message = 2;
-}
-
-message VehicleActuationWarningResponse {
   bool success = 1;
   string error_message = 2;
 }
