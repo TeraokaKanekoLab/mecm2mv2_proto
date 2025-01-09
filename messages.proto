@@ -186,6 +186,7 @@ message VirtualNodeApiActuateResponse {
   string request_id = 1;
   oneof response {
     VehicleActuationBrakeResponse vehicle_actuation_brake = 2;
+    VehicleActuationWarningResponse vehicle_actuation_warning = 3;
   }
 }
 
