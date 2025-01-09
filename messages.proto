@@ -191,7 +191,7 @@ message VirtualNodeApiActuateResponse {
 }
 
 message VehicleActuationBrakeRequest {
-  string brake_force = 1;
+  double brake_force = 1;
 }
 
 message VehicleActuationWarningRequest {
